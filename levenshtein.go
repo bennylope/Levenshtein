@@ -7,12 +7,12 @@ func Distance(a string, b string) int {
 		return 0
 	}
 
-    if len(a) == 0 {
-        return len(b)
-    }
-    if len(b) == 0 {
-        return len(a)
-    }
+	if len(a) == 0 {
+		return len(b)
+	}
+	if len(b) == 0 {
+		return len(a)
+	}
 
 	var longer *string
 	var shorter *string

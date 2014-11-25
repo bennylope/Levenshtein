@@ -3,9 +3,9 @@ package levenshtein
 import "testing"
 
 func TestSimpleDistance(t *testing.T) {
-  var d int
+	var d int
 
-  d = Distance("kitten", "kitten")
+	d = Distance("kitten", "kitten")
 	if d != 0 {
 		t.Error("Expected distance of 0, got ", d)
 	}
