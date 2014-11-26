@@ -29,4 +29,15 @@ func TestSimpleDistance(t *testing.T) {
 	if d != 3 {
 		t.Error("Expected distance of 3, got ", d)
 	}
+
+	d = Distance("kitten", "itten")
+	if d != 1 {
+		t.Error("Expected distance of 1, got ", d)
+	}
+
+	d = Distance("kitten", "itte")
+	if d != 2 {
+		t.Error("Expected distance of 2, got ", d)
+	}
+
 }
