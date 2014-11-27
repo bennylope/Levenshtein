@@ -19,29 +19,25 @@ fn string_distance(source: &str, target: &str) -> int {
     // Named variables will be immutable by default - specify that this one is mutable so we can increment later.
     let mut distance: int = 0;
 
-    let longer: &str;
-    let shorter: &str;
+    let longer: &[u8];
+    let shorter: &[u8];
 
     if source.len() > target.len() {
-        longer = source;
-        shorter = target;
+        longer = source.as_bytes();
+        shorter = target.as_bytes();
     } else {
-        longer = target;
-        shorter = source;
+        longer = target.as_bytes();
+        shorter = source.as_bytes();
     }
 
     for x in range(0, shorter.len()) {
-        if shorter.as_bytes()[x] != longer.as_bytes()[x] {
-            println!("{} != {}", shorter.as_bytes()[x], longer.as_bytes()[x]);
+        if shorter[x] != longer[x] {
+            println!("{} != {}", shorter[x], longer[x]);
             distance = distance + 1;
         }
     }
 
-    println!("{}, {}!!", shorter, longer);
-
-    // Subtracting 1 to account for unstripped newline that is not counted in the
-    // len() value but is converted to a byte for comparisons sake.
-    distance + longer.len() as int - shorter.len() as int - 1  // function return, no semi-colon
+    distance + longer.len() as int - shorter.len() as int  // function return, no semi-colon
 }
 
 fn main() {
