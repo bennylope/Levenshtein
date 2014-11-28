@@ -2,6 +2,8 @@
 // making an attempt to learn the language in any useful way for the time
 // being.
 
+use std::str;
+
 // Initially thought to use String types but Rust complained that the code
 // needed to use clone(). We don't need to operate on the strings, just
 // references to them, so using slices - `&str` - works much better.
@@ -32,12 +34,12 @@ fn string_distance(source: &str, target: &str) -> int {
 
     for x in range(0, shorter.len()) {
         if shorter[x] != longer[x] {
-            println!("{} != {}", shorter[x], longer[x]);
             distance = distance + 1;
         }
     }
 
-    distance + longer.len() as int - shorter.len() as int  // function return, no semi-colon
+    // Still need to account for the newline characters apparently
+    distance + longer.len() as int - shorter.len() as int - 1 // function return, no semi-colon
 }
 
 fn main() {
@@ -45,10 +47,14 @@ fn main() {
     println!("First string?");
     let source = std::io::stdin().read_line().ok().expect("Failed to read line");
     println!("Second string?");
-    let target = std::io::stdin().read_line().ok().expect("Failed to read line");
-    // Have to strip the newlines from the input strings
+    let target = std::io::stdin().read_line()
+                                .ok()
+                                .expect("Failed to read line");
 
     let distance: int = string_distance(source.as_slice(), target.as_slice());
-    let distance_fmt: String = distance.to_string();
-    println!("{} has a distance of {} from {}", target, distance_fmt, source);
+    println!("{:s} has a distance of {} from {:s}",
+            // str::replace returns a String from 3 &str parameters
+            str::replace(target.as_slice(), "\n", ""),
+            distance.to_string(),
+            str::replace(source.as_slice(), "\n", ""));
 }
